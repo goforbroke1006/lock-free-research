@@ -1,0 +1,17 @@
+.idea/
+.vs/
+
+*.out
+*.exe
+*.log
+
+vendor/
+
+# build
+lock-free-research
+
+# generated assets
+numbers-*.txt
+
+# logs
+benchmark.txt
