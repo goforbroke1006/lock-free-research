@@ -25,6 +25,9 @@ fi
 if [[ ! -f ./numbers-10000000.txt ]]; then
   bash ./gen-rand-numbers.sh 10000000
 fi
+if [[ ! -f ./numbers-100000000.txt ]]; then
+  bash ./gen-rand-numbers.sh 100000000
+fi
 
 # run
 ./lock-free-research util run-standard --filename=numbers-10000.txt | tee -a benchmark.txt
@@ -38,3 +41,6 @@ fi
 
 ./lock-free-research util run-standard --filename=numbers-10000000.txt | tee -a benchmark.txt
 ./lock-free-research util run-lock-free --filename=numbers-10000000.txt | tee -a benchmark.txt
+
+./lock-free-research util run-standard --filename=numbers-100000000.txt | tee -a benchmark.txt
+./lock-free-research util run-lock-free --filename=numbers-100000000.txt | tee -a benchmark.txt
