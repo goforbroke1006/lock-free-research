@@ -33,8 +33,8 @@ fi
 ./lock-free-research util run-standard --filename=numbers-100000.txt | tee -a benchmark.txt
 ./lock-free-research util run-lock-free --filename=numbers-100000.txt | tee -a benchmark.txt
 
-./lock-free-research run-standard --filename=numbers-1000000.txt | tee -a benchmark.txt
-./lock-free-research run-lock-free --filename=numbers-1000000.txt | tee -a benchmark.txt
+./lock-free-research util run-standard --filename=numbers-1000000.txt | tee -a benchmark.txt
+./lock-free-research util run-lock-free --filename=numbers-1000000.txt | tee -a benchmark.txt
 
-./lock-free-research run-standard --filename=numbers-10000000.txt | tee -a benchmark.txt
-./lock-free-research run-lock-free --filename=numbers-10000000.txt | tee -a benchmark.txt
+./lock-free-research util run-standard --filename=numbers-10000000.txt | tee -a benchmark.txt
+./lock-free-research util run-lock-free --filename=numbers-10000000.txt | tee -a benchmark.txt
