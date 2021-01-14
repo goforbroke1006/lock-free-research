@@ -1,0 +1,11 @@
+.idea/
+.vs/
+.git/
+
+docker-compose.yaml
+
+.gitignore
+benchmark.sh
+benchmark-*.txt
+gen-rand-numbers.sh
+numbers-*.txt

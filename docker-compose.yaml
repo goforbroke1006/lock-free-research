@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  daemon-tcp-counter-mutex-based:
+    image: docker.io/goforbroke1006/lock-free-research:latest
+    command: [ 'daemon', 'tcp-counter-mutex-based' ]
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 1024M
+        reservations:
+          cpus: '4.0'
+          memory: 1024M
+  daemon-tcp-counter-lock-free:
+    image: docker.io/goforbroke1006/lock-free-research:latest
+    command: [ 'daemon', 'tcp-counter-lock-free' ]
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 1024M
+        reservations:
+          cpus: '4.0'
+          memory: 1024M
