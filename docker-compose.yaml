@@ -1,25 +1,88 @@
 version: '3'
 
 services:
-  daemon-tcp-counter-mutex-based:
+  api-tcp-counter-mutex-based-lb:
+    image: library/nginx:latest
+    volumes:
+      - ./.compose/api-tcp-counter-mutex-based-lb/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api-tcp-counter-mutex-based
+    ports:
+      - "10001:10000"
+
+  api-tcp-counter-lock-free-lb:
+    image: library/nginx:latest
+    volumes:
+      - ./.compose/api-tcp-counter-lock-free-lb/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - api-tcp-counter-lock-free
+    ports:
+      - "10002:10000"
+
+  api-tcp-counter-mutex-based:
     image: docker.io/goforbroke1006/lock-free-research:latest
-    command: [ 'daemon', 'tcp-counter-mutex-based' ]
-    deploy:
-      resources:
-        limits:
-          cpus: '4.0'
-          memory: 1024M
-        reservations:
-          cpus: '4.0'
-          memory: 1024M
-  daemon-tcp-counter-lock-free:
+    command: [ 'api', 'tcp-counter-mutex-based' ]
+    ports:
+      - "8010-8012:8080"
+#    expose:
+#      - 10000
+    cpu_quota: 4000
+    mem_limit: 2048M
+
+  api-tcp-counter-lock-free:
     image: docker.io/goforbroke1006/lock-free-research:latest
-    command: [ 'daemon', 'tcp-counter-lock-free' ]
-    deploy:
-      resources:
-        limits:
-          cpus: '4.0'
-          memory: 1024M
-        reservations:
-          cpus: '4.0'
-          memory: 1024M
+    command: [ 'api', 'tcp-counter-lock-free' ]
+    ports:
+      - "8020-8022:8080"
+#    expose:
+#      - 10000
+    cpu_quota: 4000
+    mem_limit: 2048M
+
+  grafana:
+    restart: always
+    image: grafana/grafana:6.7.5-ubuntu
+    depends_on:
+      - prometheus
+    ports:
+      - 3000:3000
+    entrypoint: [ "bash", "/setup.sh" ]
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - grafana-prov:/etc/grafana/provisioning/
+      - ./.compose/grafana/setup.sh:/setup.sh
+    environment:
+      - GF_SECURITY_ADMIN_USER=${ADMIN_USER:-admin}
+      - GF_SECURITY_ADMIN_PASSWORD=${ADMIN_PASSWORD:-admin}
+      - GF_USERS_ALLOW_SIGN_UP=false
+
+  prometheus:
+    restart: always
+    image: prom/prometheus:v2.22.2
+    volumes:
+      - ./.compose/prometheus/:/etc/prometheus/
+    command:
+      - --config.file=/etc/prometheus/prometheus.yml
+      - --web.enable-lifecycle
+    ports:
+      - 9090:9090
+
+  node-exporter:
+    image: prom/node-exporter:v1.0.1
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - --path.procfs=/host/proc
+      - --path.sysfs=/host/sys
+      - --collector.filesystem.ignored-mount-points
+      - ^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)
+    ports:
+      - 9100:9100
+    restart: always
+
+volumes:
+  postgres-data:
+  grafana-data:
+  grafana-prov:

@@ -15,3 +15,5 @@ numbers-*.txt
 
 # logs
 benchmark-*.txt
+
+.stand

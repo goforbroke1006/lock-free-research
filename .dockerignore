@@ -5,7 +5,13 @@
 docker-compose.yaml
 
 .gitignore
-benchmark.sh
-benchmark-*.txt
-gen-rand-numbers.sh
-numbers-*.txt
+
+.compose
+.grafana
+
+Dockerfile
+
+.stand
+.stand.dist
+
+lock-free-research

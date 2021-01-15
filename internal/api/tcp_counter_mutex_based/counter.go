@@ -1,4 +1,4 @@
-package number_counter
+package tcp_counter_mutex_based
 
 import (
 	"github.com/goforbroke1006/lock-free-research/internal"
