@@ -1,5 +1,11 @@
 # lock-free-research
 
+Check lock-free algorithms performance.
+
+Use counter service as subject of testing.
+
+Do 2 implementation - with mutexes and lock-free.
+
 ### Benchmarks
 
 ```bash
@@ -17,10 +23,21 @@ go build
 * AMD Ryzen 9 3900 12-Core Processor
 * RAM 32 Gb
 * Limits - defined in **docker-compose.yaml**
+* Networking - 10k load inside local network (192.168.x.*/24)
 
 #### Metrics
 
 <img src="./report.png" alt="Grafana metrics sample"/>
+
+##### Explanation
+
+Load was increased from 1-1,5k to 10k RPS.
+
+During all this experiment, lock-free implementation spend 900-930 nanoseconds.
+
+When RPS lower than 5k, mutex-based impl spend 970-990 nanoseconds.
+
+When RPS exceed 5k, processing duration for mutex-based impl sometimes spend 1-8 seconds (1-8 billions nanoseconds).
 
 ### Useful links
 
