@@ -19,6 +19,11 @@ go build
 
 ```
 
+### Files
+
+* **internal/api/tcp_counter_mutex_based/counter.go** - mutex-based impl
+* **internal/api/tcp_counter_lock_free/counter.go** - lock-free impl
+
 ### Report
 
 #### Performance stand (bare-metal)
