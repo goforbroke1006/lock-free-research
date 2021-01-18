@@ -49,5 +49,7 @@ When RPS exceed 5k, processing duration for mutex-based impl sometimes spend 1-8
 
 ### Useful links
 
+* [Lock-free theory (RU)](https://habr.com/ru/company/wunderfund/blog/322094/)
+* [Compare-and-swap (CAS) operation](https://en.wikipedia.org/wiki/Compare-and-swap)
 * [LB for compose](https://pspdfkit.com/blog/2018/how-to-use-docker-compose-to-run-multiple-instances-of-a-service-in-development/)
 * [Nginx LB for TCP & UPD](https://docs.nginx.com/nginx/admin-guide/load-balancer/tcp-udp-load-balancer/)
