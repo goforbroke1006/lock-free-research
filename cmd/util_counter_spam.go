@@ -18,7 +18,8 @@ import (
 func init() {
 	var (
 		addr       = "0.0.0.0:10000"
-		concurrent = 25
+		concurrent = 10000
+		interval   = time.Second
 	)
 
 	var runStandardCmd = &cobra.Command{
@@ -45,7 +46,7 @@ func init() {
 						case <-ctx.Done():
 							break INFINITE
 						default:
-							time.Sleep(2500 * time.Microsecond)
+							time.Sleep(interval)
 							num := 10 + rand.Intn(89)
 							_, _ = fmt.Fprintf(conn, "%d\n", num)
 						}
@@ -79,6 +80,7 @@ func init() {
 
 	runStandardCmd.PersistentFlags().StringVar(&addr, "addr", addr, "TCP server address")
 	runStandardCmd.PersistentFlags().IntVar(&concurrent, "concurrent", concurrent, "Concurrent operations count")
+	runStandardCmd.PersistentFlags().DurationVar(&interval, "interval", interval, "Interval between requests")
 
 	utilCmd.AddCommand(runStandardCmd)
 }
