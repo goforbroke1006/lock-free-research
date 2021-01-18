@@ -22,7 +22,7 @@ go build
 
 * AMD Ryzen 9 3900 12-Core Processor
 * RAM 32 Gb
-* Limits - defined in **docker-compose.yaml** (cpu quota = 4000, mem limit = 2048M)
+* Limits - defined in **docker-compose.yaml** (cpu quota = 4000, mem limit = 2048M for each daemon counter impl)
 * Networking - 10k load inside local network (192.168.x.*/24)
 
 #### Metrics
