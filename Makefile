@@ -20,7 +20,6 @@ stand/deploy:
 	@ssh ${PERFORMANCE_STAND_USER}@${PERFORMANCE_STAND_IP} "mkdir -p ${PERFORMANCE_STAND_DIR}"
 	@scp ./docker-compose.yaml ${PERFORMANCE_STAND_USER}@${PERFORMANCE_STAND_IP}:${PERFORMANCE_STAND_DIR}/
 	@scp -r ./.compose         ${PERFORMANCE_STAND_USER}@${PERFORMANCE_STAND_IP}:${PERFORMANCE_STAND_DIR}/
-	@#ssh ${PERFORMANCE_STAND_USER}@${PERFORMANCE_STAND_IP} "cd ${PERFORMANCE_STAND_DIR} && docker-compose stop"
 	@ssh ${PERFORMANCE_STAND_USER}@${PERFORMANCE_STAND_IP} "cd ${PERFORMANCE_STAND_DIR} && docker-compose pull"
 	@ssh ${PERFORMANCE_STAND_USER}@${PERFORMANCE_STAND_IP} "cd ${PERFORMANCE_STAND_DIR} && bash ./.compose/rolling-update.sh api-tcp-counter-mutex-based"
 	@ssh ${PERFORMANCE_STAND_USER}@${PERFORMANCE_STAND_IP} "cd ${PERFORMANCE_STAND_DIR} && bash ./.compose/rolling-update.sh api-tcp-counter-lock-free"

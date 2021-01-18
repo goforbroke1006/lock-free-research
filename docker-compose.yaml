@@ -27,8 +27,6 @@ services:
     command: [ 'api', 'tcp-counter-mutex-based' ]
     ports:
       - "8010-8012:8080"
-#    expose:
-#      - 10000
     cpu_quota: 4000
     mem_limit: 2048M
 
@@ -38,8 +36,6 @@ services:
     command: [ 'api', 'tcp-counter-lock-free' ]
     ports:
       - "8020-8022:8080"
-#    expose:
-#      - 10000
     cpu_quota: 4000
     mem_limit: 2048M
 

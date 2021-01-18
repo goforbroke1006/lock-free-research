@@ -9,6 +9,9 @@ Do 2 implementation - with mutexes and lock-free.
 ### Benchmarks
 
 ```bash
+make stand
+# check prometheus target is ready (use link in output)
+
 go build
 ./lock-free-research util counter-spam --addr=192.168.0.211:10001 --concurrent=10000 --interval=50ms
 ./lock-free-research util counter-spam --addr=192.168.0.211:10002 --concurrent=10000 --interval=50ms
